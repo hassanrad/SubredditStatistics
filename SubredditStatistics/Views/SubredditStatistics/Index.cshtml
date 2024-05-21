@@ -1,0 +1,68 @@
+﻿@using Reddit.Things
+@model SubredditStatistics.Models.SubredditStatisticsModel
+
+<div>
+    <h1>Statistics for newest posts from subreddit: @Model.SubredditName</h1>
+</div>
+
+<div>
+    <h5 style="color: red">Refresh the page for an updated listing</h5>
+</div>
+
+<div>
+    <h3>Posts with the most up-votes</h3>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Post-Title</th>
+            <th scope="col">Up-Votes</th>
+            <th scope="col">Permalink</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int i = 1;
+            foreach (Post post in Model.PostsWithMostUpVotes)
+            {
+                <tr>
+                    <th scope="row">@i</th>
+                    <td>@post.Title</td>
+                    <td>@post.Ups</td>
+                    <td>@post.Permalink</td>
+                </tr>
+
+                i++;
+            }
+        }
+    </tbody>
+</table>
+<br />
+<div>
+    <h3>Users with the most posts</h3>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">Posts</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            int j = 1;
+            foreach (KeyValuePair<string,int> user in Model.UsersWithMostPosts)
+            {
+                <tr>
+                    <th scope="row">@j</th>
+                    <td>@user.Key</td>
+                    <td>@user.Value</td>
+                </tr>
+
+                j++;
+            }
+        }
+    </tbody>
+</table>
